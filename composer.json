@@ -1,0 +1,26 @@
+{
+    "name": "botuild/guild-bot-protocol",
+    "description": "The QQ Guild Bot Protocol implementation in PHP",
+    "type": "library",
+    "license": "LGPL-2.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "Botuild\\GuildBotProtocol\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MuChen",
+            "email": "2387911242@qq.com"
+        },
+        {
+            "name": "MuChen",
+            "email": "1653573879@qq.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "workerman/workerman": "^4.0",
+        "symfony/event-dispatcher": "^5.3"
+    }
+}
