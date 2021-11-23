@@ -22,7 +22,8 @@
     "require": {
         "workerman/workerman": "^4.0",
         "symfony/event-dispatcher": "^5.3",
-        "sokil/php-bitmap": "^2.0"
+        "sokil/php-bitmap": "^2.0",
+        "ext-json": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"

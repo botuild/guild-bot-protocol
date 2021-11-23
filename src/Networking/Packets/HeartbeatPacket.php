@@ -18,7 +18,7 @@ class HeartbeatPacket implements Packet
         ];
     }
 
-    public static function parse(BasePacket $packet): Packet
+    public static function parse(BasePacket $packet): self
     {
         // TODO: Implement parse() method.
         return new HeartbeatPacket();

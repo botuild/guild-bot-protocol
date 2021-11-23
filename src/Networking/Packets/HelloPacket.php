@@ -24,7 +24,7 @@ class HelloPacket implements Packet
         ];
     }
 
-    public static function parse(BasePacket $packet): Packet
+    public static function parse(BasePacket $packet): self
     {
         return new HelloPacket(
             is_array($packet->payload) && key_exists('heartbeat_interval', $packet->payload) ?

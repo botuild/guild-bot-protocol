@@ -31,7 +31,7 @@ class IdentifyPacket implements Packet
         ];
     }
 
-    public static function parse(BasePacket $packet): Packet
+    public static function parse(BasePacket $packet): self
     {
         return new IdentifyPacket(
             $packet->payload['token'],
@@ -51,7 +51,7 @@ class IdentifyPacket implements Packet
             'shard' => [$this->shard['id'], $this->shard['total']],
             'properties' => [
                 '$os' => 'linux',
-                '$browser' => 'botuild-protocol 1.0 (By Jason)',
+                '$browser' => 'botuild-protocol',
                 '$device' => $this->device
             ]
         ];
