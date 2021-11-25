@@ -34,7 +34,6 @@ class WebsocketClient
             }
         }
         $this->connection = new AsyncTcpConnection($parsed_address['scheme'] . '://' . $parsed_address['host'] . $parsed_address['path']);
-        var_dump($parsed_address['scheme'] . '://' . $parsed_address['host'] . $parsed_address['path']);
         if ($secure_layer_transport) $this->connection->transport = 'ssl';
         $this->connection->onMessage = [$this, 'onMessage'];
         $this->connection->onClose = [$this, 'onClose'];
@@ -63,7 +62,7 @@ class WebsocketClient
         $packet_decoded = json_decode($received_packet_raw, true);
         if ($packet_decoded == null) return;
         $base_packet = BasePacket::fromRaw($packet_decoded);
-        $packet = $this->packets->resolve($base_packet);
+        $packet = $this->packets->resolve($base_packet, $this->client);
         if ($packet == null) {
             //Process unregistered packet
             return;
@@ -80,11 +79,11 @@ class WebsocketClient
 
     public function onClose()
     {
-
+        //@TODO:Forward the event to user
     }
 
     public function onError()
     {
-
+        //@TODO:Forward the event to user
     }
 }

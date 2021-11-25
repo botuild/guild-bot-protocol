@@ -5,6 +5,7 @@ namespace Botuild\GuildBotProtocol\Registry;
 
 
 use Botuild\GuildBotProtocol\Networking\BasePacket;
+use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 use Botuild\GuildBotProtocol\Networking\Packet;
 use TypeError;
 
@@ -29,14 +30,14 @@ class PacketRegistry
         $this->packets[$packet::getPacketInformation()['opcode']] = $packet;
     }
 
-    public function resolve(BasePacket $packet)
+    public function resolve(BasePacket $packet, ApiClient $client)
     {
         if (!isset($this->packets[$packet->opcode])) {
             return null;
         }
         if (is_string($this->packets[$packet->opcode]))
-            return $this->packets[$packet->opcode]::parse($packet);
+            return $this->packets[$packet->opcode]::parse($packet, $client);
         else
-            return $this->packets[$packet->opcode]->parse($packet);
+            return $this->packets[$packet->opcode]->parse($packet, $client);
     }
 }

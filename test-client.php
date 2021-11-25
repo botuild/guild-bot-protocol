@@ -16,11 +16,11 @@ $worker->onWorkerStart = function () {
     $client = new ApiClient($credential);
     DispatchPacket::init();
     $client = new WebsocketClient($client);
-    $client->onPacketRecieved = function ($connection, $packet) {
+    $client->onPacketRecieved = function ($connection, $packet) use ($credential) {
 
         if ($packet instanceof HelloPacket) {
             $identify = new IdentifyPacket(
-                file_get_contents('./.test-token'),
+                $credential->getAuthorizationPayload(),
                 (new \Sokil\Bitmap())->setBits(
                     [Intents::AT_MESSAGE]
                 )

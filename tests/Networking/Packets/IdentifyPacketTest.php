@@ -65,7 +65,7 @@ EOF
           }
         }
 EOF
-            , true)));
+            , true)), new ApiClient(null));
         $this->assertEquals($packet->token, 'my_token');
         $this->assertEquals($packet->device, 'my_library');
         $this->assertTrue(
