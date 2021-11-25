@@ -2,3 +2,4 @@ vendor/
 composer.lock
 .phpunit.result.cache
 .test-token
+.bot-test.json
