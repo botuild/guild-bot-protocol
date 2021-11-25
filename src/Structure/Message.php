@@ -8,6 +8,7 @@ class Message
 {
     protected function __construct()
     {
-
     }
+
+
 }

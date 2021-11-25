@@ -5,7 +5,7 @@ namespace Botuild\GuildBotProtocol\Networking\Packets;
 
 
 use Botuild\GuildBotProtocol\Networking\BasePacket;
-use Botuild\GuildBotProtocol\Networking\Packet;
+use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 use Botuild\GuildBotProtocol\Networking\Packets\Events\AtMessageEvent;
 use Botuild\GuildBotProtocol\Registry\EventRegistry;
 
@@ -28,9 +28,9 @@ class DispatchPacket implements \Botuild\GuildBotProtocol\Networking\Packet
         ];
     }
 
-    public static function parse(BasePacket $packet)
+    public static function parse(BasePacket $packet, ApiClient $client)
     {
-        return self::$events->resolve($packet);
+        return self::$events->resolve($packet, $client);
     }
 
     public function pack(): BasePacket

@@ -18,9 +18,12 @@ class WebsocketClient
     public AsyncTcpConnection $connection;
     public PacketRegistry $packets;
     public $onPacketRecieved = null;
+    public ApiClient $client;
 
-    public function __construct($address)
+    public function __construct(ApiClient $client)
     {
+        $this->client = $client;
+        $address = $this->client->get('/gateway')['url'];
         $parsed_address = parse_url($address);
         $secure_layer_transport = false;
         if ($parsed_address['scheme'] === 'wss') {

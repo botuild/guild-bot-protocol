@@ -5,6 +5,7 @@ namespace Botuild\GuildBotProtocol\Registry;
 
 
 use Botuild\GuildBotProtocol\Networking\BasePacket;
+use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 use Botuild\GuildBotProtocol\Networking\Packet;
 
 class EventRegistry
@@ -23,19 +24,19 @@ class EventRegistry
         if (
             (!class_exists($packet) || !is_subclass_of($packet, Packet::class)) and (!$packet instanceof Packet)
         ) {
-            throw new TypeError('The type of packet is wrong.Expected implements Packet , but ' . $packet . ' not.');
+            throw new \Exception('The type of packet is wrong.Expected implements Packet , but ' . $packet . ' not.');
         }
         $this->packets[$packet::getPacketInformation()['event_name']] = $packet;
     }
 
-    public function resolve(BasePacket $packet)
+    public function resolve(BasePacket $packet, ApiClient $client)
     {
         if (!isset($this->packets[$packet->payload_type])) {
             return null;
         }
         if (is_string($this->packets[$packet->payload_type]))
-            return $this->packets[$packet->payload_type]::parse($packet);
+            return $this->packets[$packet->payload_type]::parse($packet, $client);
         else
-            return $this->packets[$packet->payload_type]->parse($packet);
+            return $this->packets[$packet->payload_type]->parse($packet, $client);
     }
 }

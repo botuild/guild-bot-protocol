@@ -1,19 +1,28 @@
 <?php
 
+use Botuild\GuildBotProtocol\Credential\BotTokenCredential;
 use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
+use Botuild\GuildBotProtocol\Networking\Client\WebsocketClient;
+use Botuild\GuildBotProtocol\Networking\Intents;
+use Botuild\GuildBotProtocol\Networking\Packets\DispatchPacket;
+use Botuild\GuildBotProtocol\Networking\Packets\HelloPacket;
+use Botuild\GuildBotProtocol\Networking\Packets\IdentifyPacket;
 
 require 'vendor/autoload.php';
-/*$worker = new Workerman\Worker();
+$worker = new Workerman\Worker();
 $worker->onWorkerStart = function () {
-    \Botuild\GuildBotProtocol\Networking\Packets\DispatchPacket::init();
-    $client = new \Botuild\GuildBotProtocol\Networking\Client\WebsocketClient('wss://api.sgroup.qq.com/websocket/');
+    $botInformation = json_decode(file_get_contents('./.bot-test.json'), true);
+    $credential = new BotTokenCredential($botInformation['id'], $botInformation['token']);
+    $client = new ApiClient($credential);
+    DispatchPacket::init();
+    $client = new WebsocketClient($client);
     $client->onPacketRecieved = function ($connection, $packet) {
 
-        if ($packet instanceof \Botuild\GuildBotProtocol\Networking\Packets\HelloPacket) {
-            $identify = new \Botuild\GuildBotProtocol\Networking\Packets\IdentifyPacket(
+        if ($packet instanceof HelloPacket) {
+            $identify = new IdentifyPacket(
                 file_get_contents('./.test-token'),
                 (new \Sokil\Bitmap())->setBits(
-                    [\Botuild\GuildBotProtocol\Networking\Intents::AT_MESSAGE]
+                    [Intents::AT_MESSAGE]
                 )
             );
             $connection->send($identify);
@@ -21,9 +30,4 @@ $worker->onWorkerStart = function () {
     };
     $client->connect();
 };
-Workerman\Worker::runAll();*/
-$botInformation = json_decode(file_get_contents('./.bot-test.json'), true);
-//id token
-$credential = new \Botuild\GuildBotProtocol\Credential\BotTokenCredential($botInformation['id'], $botInformation['token']);
-$client = new ApiClient($credential);
-var_dump($client->get('/gateway'));
+Workerman\Worker::runAll();

@@ -5,6 +5,7 @@ namespace Botuild\GuildBotProtocol\Networking\Packets;
 
 
 use Botuild\GuildBotProtocol\Networking\BasePacket;
+use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 use Botuild\GuildBotProtocol\Networking\Packet;
 
 class HelloPacket implements Packet
@@ -24,7 +25,7 @@ class HelloPacket implements Packet
         ];
     }
 
-    public static function parse(BasePacket $packet): self
+    public static function parse(BasePacket $packet, ApiClient $client): self
     {
         return new HelloPacket(
             is_array($packet->payload) && key_exists('heartbeat_interval', $packet->payload) ?

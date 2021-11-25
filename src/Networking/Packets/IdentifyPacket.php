@@ -5,6 +5,7 @@ namespace Botuild\GuildBotProtocol\Networking\Packets;
 
 
 use Botuild\GuildBotProtocol\Networking\BasePacket;
+use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 use Botuild\GuildBotProtocol\Networking\Packet;
 use Sokil\Bitmap;
 
@@ -31,7 +32,7 @@ class IdentifyPacket implements Packet
         ];
     }
 
-    public static function parse(BasePacket $packet): self
+    public static function parse(BasePacket $packet, ApiClient $apiClient): self
     {
         return new IdentifyPacket(
             $packet->payload['token'],

@@ -5,8 +5,8 @@ namespace Botuild\GuildBotProtocol\Networking\Packets;
 
 
 use Botuild\GuildBotProtocol\Networking\BasePacket;
+use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 use Botuild\GuildBotProtocol\Networking\Packet;
-use Exception;
 
 class HeartbeatPacket implements Packet
 {
@@ -25,7 +25,7 @@ class HeartbeatPacket implements Packet
         ];
     }
 
-    public static function parse(BasePacket $packet): self
+    public static function parse(BasePacket $packet, ApiClient $client): self
     {
         return new HeartbeatPacket((int)$packet->payload);
     }
