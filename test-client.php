@@ -15,8 +15,9 @@ $worker->onWorkerStart = function () {
     $credential = new BotTokenCredential($botInformation['id'], $botInformation['token']);
     $client = new ApiClient($credential);
     DispatchPacket::init();
-    $client = new WebsocketClient($client);
-    $client->onPacketRecieved = function ($connection, $packet) use ($credential) {
+    $ws_client = new WebsocketClient($client);
+    //var_dump(\Botuild\GuildBotProtocol\Structure\Guild::get($client,'2924999043509161390'));
+    $ws_client->onPacketRecieved = function ($connection, $packet) use ($credential) {
 
         if ($packet instanceof HelloPacket) {
             $identify = new IdentifyPacket(
@@ -27,7 +28,10 @@ $worker->onWorkerStart = function () {
             );
             $connection->send($identify);
         }
+        if ($packet instanceof \Botuild\GuildBotProtocol\Networking\Packets\Events\AtMessageEvent) {
+            var_dump($packet);
+        }
     };
-    $client->connect();
+    $ws_client->connect();
 };
 Workerman\Worker::runAll();

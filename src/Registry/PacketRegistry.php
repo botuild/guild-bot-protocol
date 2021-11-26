@@ -30,14 +30,14 @@ class PacketRegistry
         $this->packets[$packet::getPacketInformation()['opcode']] = $packet;
     }
 
-    public function resolve(BasePacket $packet, ApiClient $client)
+    public function resolve(ApiClient $client, BasePacket $packet)
     {
         if (!isset($this->packets[$packet->opcode])) {
             return null;
         }
         if (is_string($this->packets[$packet->opcode]))
-            return $this->packets[$packet->opcode]::parse($packet, $client);
+            return $this->packets[$packet->opcode]::parse($client, $packet);
         else
-            return $this->packets[$packet->opcode]->parse($packet, $client);
+            return $this->packets[$packet->opcode]->parse($client, $packet);
     }
 }

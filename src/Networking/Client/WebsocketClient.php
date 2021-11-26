@@ -62,7 +62,7 @@ class WebsocketClient
         $packet_decoded = json_decode($received_packet_raw, true);
         if ($packet_decoded == null) return;
         $base_packet = BasePacket::fromRaw($packet_decoded);
-        $packet = $this->packets->resolve($base_packet, $this->client);
+        $packet = $this->packets->resolve($this->client, $base_packet);
         if ($packet == null) {
             //Process unregistered packet
             return;

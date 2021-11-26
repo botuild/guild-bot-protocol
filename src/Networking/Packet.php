@@ -10,7 +10,7 @@ interface Packet
 {
     public static function getPacketInformation(): array;
 
-    public static function parse(BasePacket $packet, ApiClient $client);
+    public static function parse(ApiClient $client, BasePacket $packet);
 
     public function pack(): BasePacket;
 }

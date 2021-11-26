@@ -29,14 +29,14 @@ class EventRegistry
         $this->packets[$packet::getPacketInformation()['event_name']] = $packet;
     }
 
-    public function resolve(BasePacket $packet, ApiClient $client)
+    public function resolve(ApiClient $client, BasePacket $packet)
     {
         if (!isset($this->packets[$packet->payload_type])) {
             return null;
         }
         if (is_string($this->packets[$packet->payload_type]))
-            return $this->packets[$packet->payload_type]::parse($packet, $client);
+            return $this->packets[$packet->payload_type]::parse($client, $packet);
         else
-            return $this->packets[$packet->payload_type]->parse($packet, $client);
+            return $this->packets[$packet->payload_type]->parse($client, $packet);
     }
 }

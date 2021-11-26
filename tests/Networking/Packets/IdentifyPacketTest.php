@@ -2,7 +2,9 @@
 
 namespace Networking\Packets;
 
+use Botuild\GuildBotProtocol\Credential\BotTokenCredential;
 use Botuild\GuildBotProtocol\Networking\BasePacket;
+use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 use Botuild\GuildBotProtocol\Networking\Intents;
 use Botuild\GuildBotProtocol\Networking\Packets\IdentifyPacket;
 use PHPUnit\Framework\TestCase;
@@ -50,7 +52,7 @@ EOF
 
     public function testParse()
     {
-        $packet = IdentifyPacket::parse(BasePacket::fromRaw(json_decode(<<<EOF
+        $packet = IdentifyPacket::parse(new ApiClient(new BotTokenCredential('test', 'test')), BasePacket::fromRaw(json_decode(<<<EOF
         {
           "op": 2,
           "d": {
@@ -65,7 +67,7 @@ EOF
           }
         }
 EOF
-            , true)), new ApiClient(null));
+            , true)));
         $this->assertEquals($packet->token, 'my_token');
         $this->assertEquals($packet->device, 'my_library');
         $this->assertTrue(

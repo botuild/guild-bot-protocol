@@ -25,7 +25,7 @@ class HeartbeatPacket implements Packet
         ];
     }
 
-    public static function parse(BasePacket $packet, ApiClient $client): self
+    public static function parse(ApiClient $client, BasePacket $packet): self
     {
         return new HeartbeatPacket((int)$packet->payload);
     }

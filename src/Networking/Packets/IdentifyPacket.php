@@ -32,7 +32,7 @@ class IdentifyPacket implements Packet
         ];
     }
 
-    public static function parse(BasePacket $packet, ApiClient $apiClient): self
+    public static function parse(ApiClient $apiClient, BasePacket $packet): self
     {
         return new IdentifyPacket(
             $packet->payload['token'],

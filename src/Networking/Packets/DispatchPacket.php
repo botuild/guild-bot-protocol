@@ -28,9 +28,9 @@ class DispatchPacket implements \Botuild\GuildBotProtocol\Networking\Packet
         ];
     }
 
-    public static function parse(BasePacket $packet, ApiClient $client)
+    public static function parse(ApiClient $client, BasePacket $packet)
     {
-        return self::$events->resolve($packet, $client);
+        return self::$events->resolve($client, $packet);
     }
 
     public function pack(): BasePacket
