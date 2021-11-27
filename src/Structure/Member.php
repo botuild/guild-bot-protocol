@@ -4,6 +4,7 @@
 namespace Botuild\GuildBotProtocol\Structure;
 
 
+use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 use Carbon\Carbon;
 
 class Member
@@ -29,6 +30,11 @@ class Member
             $raw['roles'] ?? [],
             Carbon::parse($raw['joined_at'] ?? '2010-01-01 0:0:0')
         );
+    }
+
+    public static function get($member_id, Guild $guild, ApiClient $client)
+    {
+        return self::parse($client->get('/guilds/' . $guild->getId() . '/members/' . $member_id));
     }
 
     public function attachUser(User $user)

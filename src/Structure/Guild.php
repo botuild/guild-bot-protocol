@@ -6,10 +6,12 @@ namespace Botuild\GuildBotProtocol\Structure;
 
 use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 use Botuild\GuildBotProtocol\Types\CountLimiter;
+use Botuild\GuildBotProtocol\Util\GetterMapper;
 use Carbon\Carbon;
 
 class Guild
 {
+    use GetterMapper;
     protected $id;
     protected $name;
     protected $icon_url;
@@ -54,13 +56,6 @@ class Guild
         return $this;
     }
 
-    public function __get($key)
-    {
-        $method_name = 'get' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-        if (method_exists($this, $method_name)) {
-            $this->$method_name();
-        }
-    }
 
     /**
      * @return mixed
@@ -120,6 +115,37 @@ class Guild
 
     public function getOwner()
     {
+        return $this->getMember($this->owner_id);
+    }
 
+    public function getMember($member_id)
+    {
+        return Member::get($member_id, $this, $this->client);
+
+    }
+
+    public function getRoles()
+    {
+        $roles = $this->client->get('/guilds/' . $this->id . '/roles');
+        $parsed_roles = [];
+        foreach ($roles['roles'] as $role) {
+            array_push($parsed_roles, Role::parse($role));
+        }
+        return $parsed_roles;
+    }
+
+    public function getChannels()
+    {
+        $channels_raw = $this->client->get('/guilds/' . $this->id . '/channels');
+        $channels = [];
+        foreach ($channels_raw as $channel) {
+            array_push($channels, Channel::parse($channel));
+        }
+        return $channels;
+    }
+
+    public function getChannel($channel_id)
+    {
+        return Channel::get($channel_id, $this->client);
     }
 }

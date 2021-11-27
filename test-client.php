@@ -16,7 +16,10 @@ $worker->onWorkerStart = function () {
     $client = new ApiClient($credential);
     DispatchPacket::init();
     $ws_client = new WebsocketClient($client);
-    //var_dump(\Botuild\GuildBotProtocol\Structure\Guild::get($client,'2924999043509161390'));
+    $roles = \Botuild\GuildBotProtocol\Structure\Guild::get('2924999043509161390', $client)->getChannels();
+    foreach ($roles as $role) {
+        echo $role->name . ' ' . $role->type . PHP_EOL;
+    }
     $ws_client->onPacketRecieved = function ($connection, $packet) use ($credential) {
 
         if ($packet instanceof HelloPacket) {
