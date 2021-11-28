@@ -30,7 +30,8 @@ class ApiClient
     {
         return [
             'Authorization' => $this->credential->getAuthorizationPayload(),
-            'User-Agent' => 'Botuild/0.1 (Guzzle Client)'
+            'User-Agent' => 'Botuild/0.1 (Guzzle Client)',
+            'Content-Type' => 'application/json'
         ];
     }
 

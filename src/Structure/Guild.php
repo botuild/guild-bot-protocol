@@ -152,7 +152,11 @@ class Guild
         $channels_raw = $this->client->get('/guilds/' . $this->id . '/channels');
         $channels = [];
         foreach ($channels_raw as $channel) {
-            array_push($channels, Channel::parse($channel, $this->client));
+            try {
+                array_push($channels, Channel::parse($channel, $this->client));
+            } catch (\Exception $exception) {
+                continue;
+            }
         }
         return $channels;
     }

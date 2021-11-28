@@ -20,7 +20,7 @@ $worker->onWorkerStart = function () {
     foreach ($roles as $role) {
         echo $role->name . ' ' . $role->type . PHP_EOL;
     }
-    $ws_client->onPacketRecieved = function ($connection, $packet) use ($credential) {
+    $ws_client->onPacketRecieved = function ($connection, $packet) use ($credential, $client) {
         var_dump($packet);
         if ($packet instanceof HelloPacket) {
             $identify = new IdentifyPacket(
@@ -30,6 +30,13 @@ $worker->onWorkerStart = function () {
                 )
             );
             $connection->send($identify);
+        }
+        if ($packet instanceof \Botuild\GuildBotProtocol\Networking\Packets\Events\AtMessageEvent) {
+            $botMsg = new \Botuild\GuildBotProtocol\Structure\BotMessage();
+
+            $botMsg->setContent('OK!')->attachMessage($packet->message)->withClient($client);
+            var_dump($botMsg->pack());
+            $botMsg->send();
         }
     };
     $ws_client->connect();
