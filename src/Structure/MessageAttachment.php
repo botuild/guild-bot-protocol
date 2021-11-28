@@ -15,7 +15,7 @@ class MessageAttachment
 
     public static function parse($raw)
     {
-        return new MessageAttachment($raw['url']);
+        return new MessageAttachment($raw['url'] ?? null);
     }
 
     public function pack()

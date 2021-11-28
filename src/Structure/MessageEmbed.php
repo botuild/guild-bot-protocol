@@ -30,7 +30,7 @@ class MessageEmbed
             $raw['description'] ?? '',
             $raw['prompt'] ?? null,
             Carbon::parse($raw['timestamp'] ?? '2010-01-01 0:0:0'),
-            $raw['fields']
+            $raw['fields'] ?? []
         );
     }
 

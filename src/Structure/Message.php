@@ -20,10 +20,10 @@ class Message
     public array $attachments = [];
     public array $embeds = [];
     public array $mentions = [];
-    public $message_ark = null;
+    public ?MessageArk $message_ark = null;
 
     public function __construct(
-        string $id, string $channel_id, string $guild_id, string $content, Carbon $timestamp, Carbon $edited_timestamp, bool $mention_everyone, Member $author, array $attachments, array $embeds, array $mentions, $message_ark)
+        string $id, string $channel_id, string $guild_id, string $content, Carbon $timestamp, Carbon $edited_timestamp, bool $mention_everyone, Member $author, array $attachments, array $embeds, array $mentions, ?MessageArk $message_ark)
     {
         $this->id = $id;
         $this->channel_id = $channel_id;
@@ -66,7 +66,7 @@ class Message
             $attachments,
             $embeds,
             $mentions,
-            null//@TODO:Parse Ark
+            isset($raw['ark']) ? MessageArk::parse($raw['ark']) : null
         );
     }
 }

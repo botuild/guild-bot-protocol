@@ -34,8 +34,8 @@ class Role
             $raw['id'],
             $raw['name'] ?? null,
             Hex::fromString('#' . substr($colorStr, 0, 6))->toRgba(hexdec(substr($colorStr, -2)) / 256),
-            $raw['hoist'] == 1,
-            new CountLimiter($raw['number'], $raw['member_limit'])
+            isset($raw['hoist']) ? $raw['hoist'] == 1 : false,
+            new CountLimiter($raw['number'] ?? 0, $raw['member_limit'] ?? 0)
         );
     }
 
