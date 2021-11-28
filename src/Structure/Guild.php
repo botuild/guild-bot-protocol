@@ -71,7 +71,8 @@ class Guild
 
 
     /**
-     * @return mixed
+     * 获取频道ID
+     * @return string 频道ID
      */
     public function getId()
     {
@@ -79,7 +80,8 @@ class Guild
     }
 
     /**
-     * @return mixed
+     * 获取频道名称
+     * @return string 频道名称
      */
     public function getName()
     {
@@ -87,7 +89,8 @@ class Guild
     }
 
     /**
-     * @return mixed
+     * 获取频道头像地址
+     * @return string 频道头像Url地址
      */
     public function getIconUrl()
     {
@@ -95,7 +98,8 @@ class Guild
     }
 
     /**
-     * @return mixed
+     * 获取频道创建者ID
+     * @return string 频道创建者ID
      */
     public function getOwnerId()
     {
@@ -103,7 +107,8 @@ class Guild
     }
 
     /**
-     * @return mixed
+     * 获取当前是否是创建人
+     * @return bool True OR False
      */
     public function getIsOwner()
     {
@@ -111,7 +116,8 @@ class Guild
     }
 
     /**
-     * @return CountLimiter
+     * 获取频道成员数量信息
+     * @return CountLimiter 返回最大成员数和当前共有成员数量
      */
     public function getMemberLimiter(): CountLimiter
     {
@@ -119,24 +125,38 @@ class Guild
     }
 
     /**
-     * @return mixed
+     * 获取加入时间
+     * @return string 加入时间
      */
     public function getJoinedAt()
     {
         return $this->joined_at;
     }
 
+    /**
+     * 获取频道创建者信息
+     * @return Member 频道创建者的信息
+     */
     public function getOwner()
     {
         return $this->getMember($this->owner_id);
     }
 
+    /**
+     * 获取频道用户信息
+     * @param $member_id string 用户ID
+     * @return Member 获取的用户信息
+     */
     public function getMember($member_id)
     {
         return Member::get($member_id, $this, $this->client);
 
     }
 
+    /**
+     * 获取当前所有的用户组
+     * @return array 用户组列表
+     */
     public function getRoles()
     {
         $roles = $this->client->get('/guilds/' . $this->id . '/roles');
@@ -147,6 +167,10 @@ class Guild
         return $parsed_roles;
     }
 
+    /**
+     * 获取当前所有的子频道
+     * @return array 子频道列表
+     */
     public function getChannels()
     {
         $channels_raw = $this->client->get('/guilds/' . $this->id . '/channels');
@@ -161,6 +185,11 @@ class Guild
         return $channels;
     }
 
+    /**
+     * 获取子频道信息
+     * @param $channel_id string 子频道ID
+     * @return Channel 子频道信息
+     */
     public function getChannel($channel_id)
     {
         return Channel::get($channel_id, $this->client);
