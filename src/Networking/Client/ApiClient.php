@@ -13,6 +13,12 @@ class ApiClient
     protected Credential $credential;
     public Client $client;
 
+    /**
+     * 初始化类
+     * @param Credential $credential 引用BotTokenCredential生成的身份信息
+     * @param string $base_uri 腾讯机器人API服务器
+     * @return void ApiClient初始化后的类
+     */
     public function __construct(Credential $credential, $base_uri = 'https://api.sgroup.qq.com/')
     {
         $this->credential = $credential;

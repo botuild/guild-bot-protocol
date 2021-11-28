@@ -21,6 +21,13 @@ class WebsocketClient
     public $onPacketRecieved = null;
     public ApiClient $client;
 
+    /**
+     * WebSocket链接初始化
+     * @param ApiClient $client 引用ApiClient的初始化类返回的结果
+     * @throws \Exception 可能性错误
+     * @return void 一个WebSocket类
+     */
+
     public function __construct(ApiClient $client)
     {
         $this->client = $client;
