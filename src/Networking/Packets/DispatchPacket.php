@@ -7,6 +7,8 @@ namespace Botuild\GuildBotProtocol\Networking\Packets;
 use Botuild\GuildBotProtocol\Networking\BasePacket;
 use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 use Botuild\GuildBotProtocol\Networking\Packets\Events\AtMessageEvent;
+use Botuild\GuildBotProtocol\Networking\Packets\Events\ReadyEvent;
+use Botuild\GuildBotProtocol\Networking\Packets\Events\ResumedEvent;
 use Botuild\GuildBotProtocol\Registry\EventRegistry;
 
 class DispatchPacket implements \Botuild\GuildBotProtocol\Networking\Packet
@@ -16,7 +18,9 @@ class DispatchPacket implements \Botuild\GuildBotProtocol\Networking\Packet
     public static function init()
     {
         self::$events = new EventRegistry([
-            AtMessageEvent::class
+            AtMessageEvent::class,
+            ResumedEvent::class,
+            ReadyEvent::class
         ]);
     }
 

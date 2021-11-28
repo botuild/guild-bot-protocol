@@ -32,9 +32,9 @@ class Channel
         $this->owner_id = $owner_id;
     }
 
-    public static function parse($raw)
+    public static function parse($raw, ApiClient $client)
     {
-        return new Channel(
+        return (new Channel(
             $raw['id'],
             $raw['guild_id'],
             $raw['name'],
@@ -43,12 +43,18 @@ class Channel
             $raw['position'],
             $raw['parent_id'],
             $raw['owner_id']
-        );
+        ))->withClient($client);
+    }
+
+    public function withClient($client)
+    {
+        $this->client = $client;
+        return $this;
     }
 
     public static function get($channel_id, ApiClient $client)
     {
-        return self::parse($client->get('/channels/' . $channel_id));
+        return self::parse($client->get('/channels/' . $channel_id), $client);
     }
 
     public function pack()

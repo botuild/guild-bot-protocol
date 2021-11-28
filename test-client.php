@@ -21,7 +21,7 @@ $worker->onWorkerStart = function () {
         echo $role->name . ' ' . $role->type . PHP_EOL;
     }
     $ws_client->onPacketRecieved = function ($connection, $packet) use ($credential) {
-
+        var_dump($packet);
         if ($packet instanceof HelloPacket) {
             $identify = new IdentifyPacket(
                 $credential->getAuthorizationPayload(),
@@ -30,9 +30,6 @@ $worker->onWorkerStart = function () {
                 )
             );
             $connection->send($identify);
-        }
-        if ($packet instanceof \Botuild\GuildBotProtocol\Networking\Packets\Events\AtMessageEvent) {
-            var_dump($packet);
         }
     };
     $ws_client->connect();

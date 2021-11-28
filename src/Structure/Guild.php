@@ -18,7 +18,7 @@ class Guild
     protected $owner_id;
     protected $is_owner;
     protected CountLimiter $member_limiter;
-    protected $joined_at;
+    protected Carbon $joined_at;
     protected ApiClient $client;
 
     public function __construct($id, $name, $icon_url, $owner_id, $is_owner, $member_limiter, $joined_at)
@@ -48,6 +48,19 @@ class Guild
     public static function get($id, ApiClient $client)
     {
         return self::parse($client->get('/guilds/' . $id), $client);
+    }
+
+    public function pack()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'owner_id' => $this->owner_id,
+            'is_owner' => $this->is_owner,
+            'member_count' => $this->member_limiter->current,
+            'max_members' => $this->member_limiter->total,
+            'joined_at' => $this->joined_at->toIso8601String()
+        ];
     }
 
     public function withClient(ApiClient $client)
@@ -139,7 +152,7 @@ class Guild
         $channels_raw = $this->client->get('/guilds/' . $this->id . '/channels');
         $channels = [];
         foreach ($channels_raw as $channel) {
-            array_push($channels, Channel::parse($channel));
+            array_push($channels, Channel::parse($channel, $this->client));
         }
         return $channels;
     }

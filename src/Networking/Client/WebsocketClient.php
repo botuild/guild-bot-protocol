@@ -10,6 +10,7 @@ use Botuild\GuildBotProtocol\Networking\Packets\DispatchPacket;
 use Botuild\GuildBotProtocol\Networking\Packets\HeartbeatPacket;
 use Botuild\GuildBotProtocol\Networking\Packets\HelloPacket;
 use Botuild\GuildBotProtocol\Networking\Packets\IdentifyPacket;
+use Botuild\GuildBotProtocol\Networking\Packets\ResumePacket;
 use Botuild\GuildBotProtocol\Registry\PacketRegistry;
 use Workerman\Connection\AsyncTcpConnection;
 
@@ -42,7 +43,9 @@ class WebsocketClient
             HelloPacket::class,
             HeartbeatPacket::class,
             IdentifyPacket::class,
-            DispatchPacket::class
+            DispatchPacket::class,
+            HeartbeatPacket::class,
+            ResumePacket::class
         ]);
     }
 
