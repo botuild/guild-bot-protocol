@@ -3,7 +3,9 @@
 
 namespace Botuild\GuildBotProtocol\Networking;
 
-
+/*
+ * 意图
+ */
 class Intents
 {
     const GUILD = 0;

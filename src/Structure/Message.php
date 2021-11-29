@@ -41,7 +41,7 @@ class Message
 
     public static function parse($raw, ApiClient $client)
     {
-        $author = Member::parse($raw['member'])->attachUser(User::parse($raw['author']));
+        $author = Member::parse($raw['member'] ?? [])->attachUser(User::parse($raw['author']));
         $attachments = [];
         foreach ($raw['attachments'] ?? [] as $attachment) {
             array_push($attachments, MessageAttachment::parse($attachment));

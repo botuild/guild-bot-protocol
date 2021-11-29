@@ -1,6 +1,7 @@
 <?php
 
 use Botuild\GuildBotProtocol\Credential\BotTokenCredential;
+use Botuild\GuildBotProtocol\Networking\BasePacket;
 use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 use Botuild\GuildBotProtocol\Networking\Client\WebsocketClient;
 use Botuild\GuildBotProtocol\Networking\Intents;
@@ -33,8 +34,7 @@ $worker->onWorkerStart = function () {
         }
         if ($packet instanceof \Botuild\GuildBotProtocol\Networking\Packets\Events\AtMessageEvent) {
             $botMsg = new \Botuild\GuildBotProtocol\Structure\BotMessage();
-
-            $botMsg->setContent('OK!')->attachMessage($packet->message)->withClient($client);
+            $botMsg->setContent('你好，测试！')->attachMessage($packet->message)->withClient($client);
             var_dump($botMsg->pack());
             $botMsg->send();
         }

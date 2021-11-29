@@ -15,9 +15,9 @@ class ApiClient
 
     /**
      * 初始化类
-     * @param Credential $credential 引用BotTokenCredential生成的身份信息
-     * @param string $base_uri 腾讯机器人API服务器
-     * @return void ApiClient初始化后的类
+     * @param Credential $credential 凭据信息
+     * @param string $base_uri 腾讯机器人API服务器(默认为生产环境)
+     * @return void
      */
     public function __construct(Credential $credential, $base_uri = 'https://api.sgroup.qq.com/')
     {
@@ -27,12 +27,21 @@ class ApiClient
         ]);
     }
 
+    /**
+     * @param Request $request HTTP请求
+     * @return array 返回的HTTP已解码数据
+     * @throws \GuzzleHttp\Exception\GuzzleException HTTP请求异常
+     */
     public function send(Request $request)
     {
         return json_decode($this->client->send($request)->getBody()->getContents(), true);
     }
 
-    public function getRequestHeader()
+    /**
+     * 组装当前请求的请求头
+     * @return array
+     */
+    public function getRequestHeader(): array
     {
         return [
             'Authorization' => $this->credential->getAuthorizationPayload(),
@@ -41,11 +50,22 @@ class ApiClient
         ];
     }
 
+    /**
+     * @param string $url 相对于服务器根目录的相对URL
+     * @return array 返回的HTTP已解码数据
+     * @throws \GuzzleHttp\Exception\GuzzleException HTTP请求异常
+     */
     public function get($url)
     {
         return $this->send(new Request('GET', $url, $this->getRequestHeader()));
     }
 
+    /**
+     * @param string $url 相对于服务器根目录的相对URL
+     * @param string $payload 已JSON编码的负载数据
+     * @return array 返回的HTTP已解码数据
+     * @throws \GuzzleHttp\Exception\GuzzleException HTTP请求异常
+     */
     public function post($url, $payload)
     {
         return $this->send(new Request('POST', $url, $this->getRequestHeader(), $payload));

@@ -11,6 +11,13 @@ class BasePacket
     public $payload_type;
     public $sequence;
 
+    /**
+     * 创建一个新的BasePacket实例
+     * @param int $opcode 操作码(op)
+     * @param null $payload 负载(d)
+     * @param null $payload_type 负载类型(事件类型)(t)
+     * @param null $sequence 包序列号(s)
+     */
     public function __construct(int $opcode, $payload = null, $payload_type = null, $sequence = null)
     {
         $this->opcode = $opcode;
@@ -19,6 +26,11 @@ class BasePacket
         $this->sequence = $sequence;
     }
 
+    /**
+     * 从原始数据中解码为一个BasePacket
+     * @param array $raw
+     * @return BasePacket
+     */
     public static function fromRaw(array $raw): BasePacket
     {
         $packet = new BasePacket($raw['op']);
@@ -28,7 +40,11 @@ class BasePacket
         return $packet;
     }
 
-    public function toRaw()
+    /**
+     * 转为原始数据
+     * @return array
+     */
+    public function toRaw(): array
     {
         $raw = [];
         $raw['op'] = $this->opcode;

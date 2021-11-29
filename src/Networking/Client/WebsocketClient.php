@@ -22,10 +22,10 @@ class WebsocketClient
     public ApiClient $client;
 
     /**
-     * WebSocket链接初始化
-     * @param ApiClient $client 引用ApiClient的初始化类返回的结果
-     * @throws \Exception 可能性错误
-     * @return void 一个WebSocket类
+     * WebSocket客户端初始化
+     * @param ApiClient $client API客户端
+     * @return void
+     * @throws \Exception
      */
 
     public function __construct(ApiClient $client)
@@ -56,19 +56,30 @@ class WebsocketClient
         ]);
     }
 
+    /**
+     * 连接服务器
+     */
     public function connect()
     {
         $this->connection->connect();
     }
 
+    /**
+     * 重新连接服务器
+     */
     public function reconnect()
     {
         $this->connection->reconnect();
     }
 
+    /**
+     * 接收数据包并解码
+     * @param AsyncTcpConnection $connection TCP连接
+     * @param string $received_packet_raw 收到的原始数据包
+     */
     public function onMessage(AsyncTcpConnection $connection, $received_packet_raw)
     {
-        echo '<- ' . $received_packet_raw . PHP_EOL;
+        //echo '<- ' . $received_packet_raw . PHP_EOL;
         $packet_decoded = json_decode($received_packet_raw, true);
         if ($packet_decoded == null) return;
         $base_packet = BasePacket::fromRaw($packet_decoded);
@@ -80,10 +91,14 @@ class WebsocketClient
         if ($this->onPacketRecieved != null) call_user_func($this->onPacketRecieved, $this, $packet);
     }
 
+    /**
+     * 发送数据包
+     * @param Packet $packet 数据包
+     */
     public function send(Packet $packet)
     {
         $packetRaw = json_encode($packet->pack()->toRaw());
-        echo '-> ' . $packetRaw . PHP_EOL;
+        //echo '-> ' . $packetRaw . PHP_EOL;
         $this->connection->send($packetRaw);
     }
 
