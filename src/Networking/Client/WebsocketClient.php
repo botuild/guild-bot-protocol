@@ -18,7 +18,7 @@ class WebsocketClient
 {
     public AsyncTcpConnection $connection;
     public PacketRegistry $packets;
-    public $onPacketRecieved = null;
+    public $onPacketReceived = null;
     public ApiClient $client;
 
     /**
@@ -88,7 +88,7 @@ class WebsocketClient
             //Process unregistered packet
             return;
         }
-        if ($this->onPacketRecieved != null) call_user_func($this->onPacketRecieved, $this, $packet);
+        if ($this->onPacketReceived != null) call_user_func($this->onPacketReceived, $this, $packet);
     }
 
     /**

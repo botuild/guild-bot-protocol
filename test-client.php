@@ -14,14 +14,14 @@ $worker = new Workerman\Worker();
 $worker->onWorkerStart = function () {
     $botInformation = json_decode(file_get_contents('./.bot-test.json'), true);
     $credential = new BotTokenCredential($botInformation['id'], $botInformation['token']);
-    $client = new ApiClient($credential);
+    $client = new ApiClient($credential, 'https://sandbox.api.sgroup.qq.com');
     DispatchPacket::init();
     $ws_client = new WebsocketClient($client);
-    $roles = \Botuild\GuildBotProtocol\Structure\Guild::get('2924999043509161390', $client)->getChannels();
+    /*$roles = \Botuild\GuildBotProtocol\Structure\Guild::get('2924999043509161390', $client)->getChannels();
     foreach ($roles as $role) {
         echo $role->name . ' ' . $role->type . PHP_EOL;
-    }
-    $ws_client->onPacketRecieved = function ($connection, $packet) use ($credential, $client) {
+    }*/
+    $ws_client->onPacketReceived = function ($connection, $packet) use ($credential, $client) {
         var_dump($packet);
         if ($packet instanceof HelloPacket) {
             $identify = new IdentifyPacket(
