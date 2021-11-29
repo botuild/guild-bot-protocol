@@ -88,7 +88,7 @@ class WebsocketClient
             //Process unregistered packet
             return;
         }
-        if ($this->onPacketReceived != null) call_user_func($this->onPacketReceived, $this, $packet);
+        if ($this->onPacketReceived != null) call_user_func($this->onPacketReceived, $this, $packet, $base_packet);
     }
 
     /**
