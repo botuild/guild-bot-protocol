@@ -7,6 +7,7 @@ namespace Botuild\GuildBotProtocol\Networking\Client;
 use Botuild\GuildBotProtocol\Networking\BasePacket;
 use Botuild\GuildBotProtocol\Networking\Packet;
 use Botuild\GuildBotProtocol\Networking\Packets\DispatchPacket;
+use Botuild\GuildBotProtocol\Networking\Packets\HeartbeatAcknowledgePacket;
 use Botuild\GuildBotProtocol\Networking\Packets\HeartbeatPacket;
 use Botuild\GuildBotProtocol\Networking\Packets\HelloPacket;
 use Botuild\GuildBotProtocol\Networking\Packets\IdentifyPacket;
@@ -52,7 +53,8 @@ class WebsocketClient
             IdentifyPacket::class,
             DispatchPacket::class,
             HeartbeatPacket::class,
-            ResumePacket::class
+            ResumePacket::class,
+            HeartbeatAcknowledgePacket::class
         ]);
     }
 
