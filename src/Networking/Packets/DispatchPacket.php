@@ -6,12 +6,13 @@ namespace Botuild\GuildBotProtocol\Networking\Packets;
 
 use Botuild\GuildBotProtocol\Networking\BasePacket;
 use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
+use Botuild\GuildBotProtocol\Networking\Packet;
 use Botuild\GuildBotProtocol\Networking\Packets\Events\AtMessageEvent;
 use Botuild\GuildBotProtocol\Networking\Packets\Events\ReadyEvent;
 use Botuild\GuildBotProtocol\Networking\Packets\Events\ResumedEvent;
 use Botuild\GuildBotProtocol\Registry\EventRegistry;
 
-class DispatchPacket implements \Botuild\GuildBotProtocol\Networking\Packet
+class DispatchPacket implements Packet
 {
     public static EventRegistry $events;
 

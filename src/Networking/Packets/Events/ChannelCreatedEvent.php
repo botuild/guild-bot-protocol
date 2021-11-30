@@ -11,7 +11,7 @@ class ChannelCreatedEvent extends ChannelEvent
     {
         return [
             'opcode' => 0,
-            'name' => 'Channel Created Event',
+            'name' => 'channel_created',
             'event_name' => 'CHANNEL_CREATE'
         ];
     }

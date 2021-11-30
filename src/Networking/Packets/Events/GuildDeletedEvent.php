@@ -11,7 +11,7 @@ class GuildDeletedEvent extends GuildEvent
     {
         return [
             'opcode' => 0,
-            'name' => 'Guild Deleted Event',
+            'name' => 'guild_deleted',
             'event_name' => 'GUILD_DELETE'
         ];
     }

@@ -31,7 +31,7 @@ class ReadyEvent extends Event implements Packet
     {
         return [
             'opcode' => 0,
-            'name' => 'Ready Event Packet',
+            'name' => 'ready',
             'event_name' => 'READY'
         ];
     }

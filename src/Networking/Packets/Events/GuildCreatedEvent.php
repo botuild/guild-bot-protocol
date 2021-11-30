@@ -11,7 +11,7 @@ class GuildCreatedEvent extends GuildEvent
     {
         return [
             'opcode' => 0,
-            'name' => 'Guild Created Event',
+            'name' => 'guild_created',
             'event_name' => 'GUILD_CREATE'
         ];
     }

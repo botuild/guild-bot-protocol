@@ -8,7 +8,7 @@ class ChannelDeletedEvent extends ChannelEvent
     {
         return [
             'opcode' => 0,
-            'name' => 'Channel Deleted Event',
+            'name' => 'channel_deleted',
             'event_name' => 'CHANNEL_DELETE'
         ];
     }

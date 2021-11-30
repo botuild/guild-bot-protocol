@@ -16,7 +16,7 @@ class ResumedEvent extends Event implements Packet
     {
         return [
             'opcode' => 0,
-            'name' => 'Resumed Packet',
+            'name' => 'resumed',
             'event_name' => 'RESUMED'
         ];
     }

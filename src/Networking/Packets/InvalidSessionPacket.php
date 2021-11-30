@@ -5,15 +5,16 @@ namespace Botuild\GuildBotProtocol\Networking\Packets;
 use Botuild\GuildBotProtocol\Networking\Packet;
 use Botuild\GuildBotProtocol\Networking\BasePacket;
 use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
+use Symfony\Contracts\EventDispatcher\Event;
 
-class InvalidSessionPacket implements Packet
+class InvalidSessionPacket extends Event implements Packet
 {
 
     public static function getPacketInformation(): array
     {
         return [
             'opcode' => 9,
-            'name' => 'Invalid Session'
+            'name' => 'invalid_session'
         ];
     }
 

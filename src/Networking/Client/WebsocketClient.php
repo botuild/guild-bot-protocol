@@ -111,11 +111,11 @@ class WebsocketClient
 
     public function onClose()
     {
-
+        $this->event_dispatcher->dispatch($this, 'close');
     }
 
     public function onError()
     {
-        //@TODO:Forward the event to user
+        $this->event_dispatcher->dispatch($this, 'error');
     }
 }

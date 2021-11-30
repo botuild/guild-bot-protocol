@@ -23,7 +23,7 @@ class AtMessageEvent extends Event implements Packet
     {
         return [
             'opcode' => 0,
-            'name' => 'At Message',
+            'name' => 'at_message',
             'event_name' => 'AT_MESSAGE_CREATE'
         ];
     }

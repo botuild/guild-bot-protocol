@@ -8,8 +8,9 @@ use Botuild\GuildBotProtocol\Networking\BasePacket;
 use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 use Botuild\GuildBotProtocol\Networking\Packet;
 use Sokil\Bitmap;
+use Symfony\Contracts\EventDispatcher\Event;
 
-class IdentifyPacket implements Packet
+class IdentifyPacket extends Event implements Packet
 {
     public $token;
     public $intents;
@@ -27,7 +28,7 @@ class IdentifyPacket implements Packet
     public static function getPacketInformation(): array
     {
         return [
-            'name' => 'Identify',
+            'name' => 'identify',
             'opcode' => 2
         ];
     }

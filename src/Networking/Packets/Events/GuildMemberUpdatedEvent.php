@@ -8,7 +8,7 @@ class GuildMemberUpdatedEvent extends GuildMemberEvent
     {
         return [
             'opcode' => 0,
-            'name' => 'GuildMember Update Event',
+            'name' => 'guild_member_updated',
             'event_name' => 'GUILD_MEMBER_UPDATE'
         ];
     }

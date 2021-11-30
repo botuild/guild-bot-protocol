@@ -11,7 +11,7 @@ class ChannelUpdatedEvent extends ChannelEvent
     {
         return [
             'opcode' => 0,
-            'name' => 'Channel Updated Event',
+            'name' => 'channel_updated',
             'event_name' => 'CHANNEL_UPDATE'
         ];
     }

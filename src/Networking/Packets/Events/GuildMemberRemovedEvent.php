@@ -8,7 +8,7 @@ class GuildMemberRemovedEvent
     {
         return [
             'opcode' => 0,
-            'name' => 'GuildMember Remove Event',
+            'name' => 'guild_member_removed',
             'event_name' => 'GUILD_MEMBER_REMOVE'
         ];
     }

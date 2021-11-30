@@ -7,8 +7,9 @@ namespace Botuild\GuildBotProtocol\Networking\Packets;
 use Botuild\GuildBotProtocol\Networking\BasePacket;
 use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 use Botuild\GuildBotProtocol\Networking\Packet;
+use Symfony\Contracts\EventDispatcher\Event;
 
-class HeartbeatPacket implements Packet
+class HeartbeatPacket extends Event implements Packet
 {
     public $sequence = null;
 
@@ -20,7 +21,7 @@ class HeartbeatPacket implements Packet
     public static function getPacketInformation(): array
     {
         return [
-            'name' => 'Heartbeat',
+            'name' => 'heartbeat',
             'opcode' => 1
         ];
     }

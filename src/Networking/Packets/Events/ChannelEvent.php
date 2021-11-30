@@ -8,7 +8,6 @@ use Botuild\GuildBotProtocol\Networking\BasePacket;
 use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 use Botuild\GuildBotProtocol\Networking\Packet;
 use Botuild\GuildBotProtocol\Structure\Channel;
-use Botuild\GuildBotProtocol\Structure\Guild;
 use Symfony\Contracts\EventDispatcher\Event;
 
 

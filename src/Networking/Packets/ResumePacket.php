@@ -7,8 +7,9 @@ namespace Botuild\GuildBotProtocol\Networking\Packets;
 use Botuild\GuildBotProtocol\Networking\BasePacket;
 use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 use Botuild\GuildBotProtocol\Networking\Packet;
+use Symfony\Contracts\EventDispatcher\Event;
 
-class ResumePacket implements Packet
+class ResumePacket extends Event implements Packet
 {
 
     public $token;
@@ -25,7 +26,7 @@ class ResumePacket implements Packet
     public static function getPacketInformation(): array
     {
         return [
-            'name' => 'Resume',
+            'name' => 'resume',
             'opcode' => 6
         ];
     }
