@@ -8,8 +8,10 @@ use Botuild\GuildBotProtocol\Networking\BasePacket;
 use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 use Botuild\GuildBotProtocol\Networking\Packet;
 use Botuild\GuildBotProtocol\Structure\Guild;
+use Symfony\Contracts\EventDispatcher\Event;
 
-abstract class GuildEvent implements Packet
+
+abstract class GuildEvent extends Event implements Packet
 {
     public Guild $guild;
 

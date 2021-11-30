@@ -8,8 +8,9 @@ use Botuild\GuildBotProtocol\Networking\BasePacket;
 use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 use Botuild\GuildBotProtocol\Networking\Packet;
 use Botuild\GuildBotProtocol\Structure\Message;
+use Symfony\Contracts\EventDispatcher\Event;
 
-class AtMessageEvent implements Packet
+class AtMessageEvent extends Event implements Packet
 {
     public Message $message;
 
