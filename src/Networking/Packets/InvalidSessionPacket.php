@@ -8,6 +8,7 @@ use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 
 class InvalidSessionPacket implements Packet
 {
+
     public static function getPacketInformation(): array
     {
         return [
@@ -25,4 +26,5 @@ class InvalidSessionPacket implements Packet
     {
         return new BasePacket(9);
     }
+
 }
