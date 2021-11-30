@@ -13,13 +13,15 @@ use Botuild\GuildBotProtocol\Networking\Packets\HelloPacket;
 use Botuild\GuildBotProtocol\Networking\Packets\IdentifyPacket;
 use Botuild\GuildBotProtocol\Networking\Packets\ResumePacket;
 use Botuild\GuildBotProtocol\Registry\PacketRegistry;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Workerman\Connection\AsyncTcpConnection;
 
 class WebsocketClient
 {
     public AsyncTcpConnection $connection;
     public PacketRegistry $packets;
-    public $onPacketReceived = null;
+    //public $onPacketReceived = null; @Deprecated
+    public EventDispatcher $event_dispatcher;
     public ApiClient $client;
 
     /**
@@ -56,6 +58,7 @@ class WebsocketClient
             ResumePacket::class,
             HeartbeatAcknowledgePacket::class
         ]);
+        $this->event_dispatcher = new EventDispatcher();
     }
 
     /**
@@ -85,12 +88,14 @@ class WebsocketClient
         $packet_decoded = json_decode($received_packet_raw, true);
         if ($packet_decoded == null) return;
         $base_packet = BasePacket::fromRaw($packet_decoded);
+        $this->event_dispatcher->dispatch($base_packet, 'on_packet');
         $packet = $this->packets->resolve($this->client, $base_packet);
         if ($packet == null) {
-            //Process unregistered packet
             return;
         }
-        if ($this->onPacketReceived != null) call_user_func($this->onPacketReceived, $this, $packet, $base_packet);
+        //if ($this->onPacketReceived != null) call_user_func($this->onPacketReceived, $this, $packet, $base_packet);
+        // @Deprecated Use Event Model instead.
+        $this->event_dispatcher->dispatch($packet, $packet::getPacketInformation()['name']);
     }
 
     /**
@@ -106,7 +111,7 @@ class WebsocketClient
 
     public function onClose()
     {
-        //@TODO:Forward the event to user
+
     }
 
     public function onError()

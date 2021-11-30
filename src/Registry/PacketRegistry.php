@@ -30,7 +30,7 @@ class PacketRegistry
         $this->packets[$packet::getPacketInformation()['opcode']] = $packet;
     }
 
-    public function resolve(ApiClient $client, BasePacket $packet)
+    public function resolve(ApiClient $client, BasePacket $packet): ?Packet
     {
         if (!isset($this->packets[$packet->opcode])) {
             return null;

@@ -4,7 +4,9 @@
 namespace Botuild\GuildBotProtocol\Networking;
 
 
-class BasePacket
+use Symfony\Contracts\EventDispatcher\Event;
+
+class BasePacket extends Event
 {
     public $opcode;
     public $payload;
