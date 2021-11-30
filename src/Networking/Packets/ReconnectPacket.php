@@ -8,6 +8,7 @@ use Botuild\GuildBotProtocol\Networking\Packet;
 
 class ReconnectPacket implements Packet
 {
+
     public static function getPacketInformation(): array
     {
         return [
@@ -25,4 +26,5 @@ class ReconnectPacket implements Packet
     {
         return new BasePacket(7);
     }
+
 }

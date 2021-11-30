@@ -6,10 +6,13 @@ namespace Botuild\GuildBotProtocol\Networking\Packets\Events;
 
 use Botuild\GuildBotProtocol\Networking\BasePacket;
 use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
+use Botuild\GuildBotProtocol\Networking\Packet;
 use Botuild\GuildBotProtocol\Structure\User;
 use Botuild\GuildBotProtocol\Types\CountLimiter;
+use Symfony\Contracts\EventDispatcher\Event;
 
-class ReadyEvent implements \Botuild\GuildBotProtocol\Networking\Packet
+
+class ReadyEvent extends Event implements Packet
 {
     public $version;
     public $session_id;

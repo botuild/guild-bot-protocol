@@ -9,8 +9,10 @@ use Botuild\GuildBotProtocol\Networking\Client\ApiClient;
 use Botuild\GuildBotProtocol\Networking\Packet;
 use Botuild\GuildBotProtocol\Structure\Channel;
 use Botuild\GuildBotProtocol\Structure\Guild;
+use Symfony\Contracts\EventDispatcher\Event;
 
-abstract class ChannelEvent implements Packet
+
+abstract class ChannelEvent extends Event implements Packet
 {
     public Channel $channel;
 
