@@ -3,7 +3,9 @@
 
 namespace Botuild\GuildBotProtocol\Credential;
 
-
+/*
+ * 机器人Token认证方式类
+ */
 class BotTokenCredential implements Credential
 {
     protected $bot_authorization = '';

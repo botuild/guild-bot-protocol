@@ -15,7 +15,9 @@ use Botuild\GuildBotProtocol\Networking\Packets\ResumePacket;
 use Botuild\GuildBotProtocol\Registry\PacketRegistry;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Workerman\Connection\AsyncTcpConnection;
-
+/*
+ * Websocket客户端类
+ */
 class WebsocketClient
 {
     public AsyncTcpConnection $connection;

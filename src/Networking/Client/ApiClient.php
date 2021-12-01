@@ -7,7 +7,9 @@ namespace Botuild\GuildBotProtocol\Networking\Client;
 use Botuild\GuildBotProtocol\Credential\Credential;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
-
+/*
+ * API客户端类,用于请求HTTPAPI
+ */
 class ApiClient
 {
     protected Credential $credential;
