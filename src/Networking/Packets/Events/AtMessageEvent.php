@@ -10,15 +10,8 @@ use Botuild\GuildBotProtocol\Networking\Packet;
 use Botuild\GuildBotProtocol\Structure\Message;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class AtMessageEvent extends Event implements Packet
+class AtMessageEvent extends MessageEvent
 {
-    public Message $message;
-
-    public function __construct(Message $message)
-    {
-        $this->message = $message;
-    }
-
     public static function getPacketInformation(): array
     {
         return [
@@ -26,17 +19,5 @@ class AtMessageEvent extends Event implements Packet
             'name' => 'at_message',
             'event_name' => 'AT_MESSAGE_CREATE'
         ];
-    }
-
-    public static function parse(ApiClient $client, BasePacket $packet): Packet
-    {
-        $event = new AtMessageEvent(Message::parse($packet->payload, $client));
-        return $event;
-    }
-
-    public function pack(): BasePacket
-    {
-        $packet = new BasePacket(0);
-        return $packet;
     }
 }
