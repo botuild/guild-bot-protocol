@@ -6,12 +6,12 @@ namespace Botuild\GuildBotProtocol\Structure;
 
 class User
 {
-    protected $id;
-    protected $username;
-    protected $avatar;
-    protected $is_bot;
-    protected $union_open_id;
-    protected $union_user;
+    public $id;
+    public $username;
+    public $avatar;
+    public $is_bot;
+    public $union_open_id;
+    public $union_user;
 
     public function __construct($id, $username, $avatar, $is_bot, $union_open_id, $union_user)
     {
